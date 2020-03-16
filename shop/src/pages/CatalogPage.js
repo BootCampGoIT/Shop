@@ -8,7 +8,10 @@ const CatalogPage = () => {
     return (
         <div className={css.catalogPage}>
             <h2>Catalog Page</h2>
-            <Link to="/catalog/gallery">Gallery</Link><br />
+            <Link to="/catalog/gallery" to={{
+                pathname: '/catalog/gallery',
+                state: { from: '/catalog', fff: " catalog" },
+            }}  >Gallery</Link><br />
             <Link to="/catalog/colors">Colors</Link>
             <Switch>
                 <Route path="/catalog/gallery" component={Gallery} />
