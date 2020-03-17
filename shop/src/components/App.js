@@ -18,7 +18,7 @@ const App = (props) => {
                     <Switch>
                         <Route exact path="/" component={HomePage} />
                         <Route path="/catalog" component={CatalogPage} />
-                        <Redirect to="/" />
+                        {/* <Redirect to="/" /> */}
                     </Switch>
                 </Container>
             </div>

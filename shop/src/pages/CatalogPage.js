@@ -17,8 +17,6 @@ const CatalogPage = () => {
                 <Route path="/catalog/gallery" component={Gallery} />
                 <Route path="/catalog/colors" component={Colors} />
             </Switch>
-
-
         </div>
     );
 }
