@@ -4,22 +4,31 @@ import home from '../../assets/home.png';
 
 import { NavLink } from 'react-router-dom'
 
+// const initialState = {
+//     isCatalogPageOpen: false,
+//     isCategoriesPageOpen: false
+// }
+
+
 class Sidebar extends Component {
     state = {
-        isOpen: false,
-        currentPage: ""
+        // ...initialState,
+        isCatalogPageOpen: false,
+        isCategoriesPageOpen: false
     }
 
+
     getCurrentPage = (e) => {
-        const name = e.target.name;
+        e.persist();
+        const modal = e.target.dataset.modal;
         this.setState(prevState => ({
-            currentPage: name,
-            isOpen: !prevState.isOpen
+            // ...initialState,
+            [modal]: !prevState[modal]
         }))
     }
 
     render() {
-        const { currentPage, isOpen } = this.state;
+        const { isCategoriesPageOpen, isCatalogPageOpen } = this.state;
         return (
             <div className={css.sidebar}>
                 <div className={css.logoTitle}>
@@ -29,20 +38,33 @@ class Sidebar extends Component {
 
                 <NavLink
                     exact to='/categories'
-                    name="categories"
+                    data-modal="isCategoriesPageOpen"
                     onClick={this.getCurrentPage}
                     className={css.link}
                     activeClassName={css.activeLink}> Categories </NavLink>
 
-                {currentPage === "categories" && isOpen &&
+                {isCategoriesPageOpen &&
                     <div style={{ display: "flex", flexDirection: "column" }}>
-                        <NavLink to="/roof">Roof</NavLink>
-                        <NavLink to="/wall">Wall</NavLink>
-                        <NavLink to="/window">Window</NavLink>
-                        <NavLink to="/door">Door</NavLink>
+                        <NavLink to="/categories/roof">Roof</NavLink>
+                        <NavLink to="/categories/wall">Wall</NavLink>
+                        <NavLink to="/categories/window">Window</NavLink>
+                        <NavLink to="/categories/door">Door</NavLink>
                     </div>}
 
-                <NavLink to='/catalog' name="catalog" className={css.link} activeClassName={css.activeLink}> Catalog </NavLink>
+                <NavLink
+                    to='/catalog'
+                    data-modal="isCatalogPageOpen"
+                    onClick={this.getCurrentPage}
+                    className={css.link}
+                    activeClassName={css.activeLink}> Catalog </NavLink>
+
+                {isCatalogPageOpen &&
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <NavLink to="/catalog/roof">Roof</NavLink>
+                        <NavLink to="/catalog/wall">Wall</NavLink>
+                        <NavLink to="/catalog/window">Window</NavLink>
+                        <NavLink to="/catalog/door">Door</NavLink>
+                    </div>}
             </div >
         );
     }
